@@ -48,3 +48,5 @@ export default tseslint.config({
   },
 });
 ```
+## Theming
+Theming is done through https://ui.shadcn.com/
