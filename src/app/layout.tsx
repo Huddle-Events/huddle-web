@@ -1,43 +1,21 @@
 import { AppSidebar } from "@/components/app-sidebar";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
-import { Separator } from "@/components/ui/separator.tsx";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb.tsx";
-
+import { SidebarProvider } from "@/components/ui/sidebar";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator orientation="vertical" className="mr-2 h-4" />
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">
-                  Building Your Application
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </header>
-        <main>{children}</main>
-      </SidebarInset>
-    </SidebarProvider>
+    // <div className="flex flex-col gap-5 bg-background-subtle">
+    //   <div>Ralley</div>
+    <div className="bg-background-subtle">
+      <header className="fixed top-0 left-0 right-0 z-50 border-b bg-white">
+        <div className="pl-14 h-20 flex">
+          <span className="m-auto">Ralley</span>
+        </div>
+      </header>
+      <SidebarProvider>
+        {/*<AppSidebar className="outline outline-border rounded-lg outline-1 drop-shadow-md overflow-hidden" />*/}
+        <AppSidebar className="inset-y-28 inset-x-10 outline outline-border rounded-lg outline-1 drop-shadow-md overflow-hidden" />
+        <main className="ml-14 mt-28">{children}</main>
+      </SidebarProvider>
+    </div>
+    // </div>
   );
 }

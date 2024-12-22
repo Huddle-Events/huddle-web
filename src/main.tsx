@@ -8,13 +8,15 @@ import { Inbox } from "@/pages/inbox/inbox.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="inbox" element={<Inbox />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <div className="bg-white">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="inbox" element={<Inbox />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
   </StrictMode>,
 );
