@@ -10,6 +10,8 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        "color-text": "hsl(var(--color-text))",
+        "huddle-purple": "hsl(var(--huddle-purple))",
         "background-subtle": "#F7F9FC",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -22,7 +24,7 @@ export default {
           foreground: "hsl(var(--popover-foreground))",
         },
         primary: {
-          DEFAULT: "#27272A",
+          DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {

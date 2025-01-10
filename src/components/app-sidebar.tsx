@@ -9,7 +9,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-
+import { SearchForm } from "@/components/search-form.tsx";
+import { Clock, LucideIcon, Rocket, Users } from "lucide-react";
+import { Separator } from "@/components/ui/separator.tsx";
+import { Button } from "@/components/ui/button.tsx";
 // This is sample data.
 const data = {
   navMain: [
@@ -140,28 +143,105 @@ const data = {
     },
   ],
 };
+const topLevels: { url: string; title: string; icon: LucideIcon }[] = [
+  {
+    title: "Upcoming",
+    url: "/upcoming",
+    icon: Clock,
+  },
+  {
+    title: "Trending",
+    url: "/trending",
+    icon: Rocket,
+  },
+  {
+    title: "In my network",
+    url: "/network",
+    icon: Users,
+  },
+];
 
+const industryLevels: { url: string; title: string }[] = [
+  {
+    title: "Accounting",
+    url: "/accounting",
+  },
+  {
+    title: "Administration",
+    url: "/administration",
+  },
+  {
+    title: "Agriculture",
+    url: "/agriculture",
+  },
+  {
+    title: "Architecture",
+    url: "/architecture",
+  },
+  {
+    title: "Banking",
+    url: "/banking",
+  },
+  {
+    title: "Communication",
+    url: "/communication",
+  },
+];
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
-          <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
-                      <a href={item.url}>{item.title}</a>
+        <SidebarGroup>
+          <SidebarGroupLabel>Discover Events</SidebarGroupLabel>
+          <SearchForm />
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {topLevels.map((level) => {
+                return (
+                  <SidebarMenuItem key={level.title}>
+                    <SidebarMenuButton asChild>
+                      <div className={"flex flex-row gap-2"}>
+                        <level.icon />
+                        <a href={"/"}>{level.title}</a>
+                      </div>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
+                );
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <Separator />
+        <SidebarGroup>
+          <SidebarGroupLabel>My Events</SidebarGroupLabel>
+          <div
+            className={
+              "bg-background-subtle py-6 px-4 flex flex-col gap-2 rounded-xl"
+            }
+          >
+            <p>Log in to view your active events.</p>
+            <Button variant={"outline"}>Log in</Button>
+          </div>
+        </SidebarGroup>
+        <Separator />
+        <SidebarGroup>
+          <SidebarGroupLabel>Industry</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {industryLevels.map((level) => {
+                return (
+                  <SidebarMenuItem key={level.title}>
+                    <SidebarMenuButton asChild>
+                      <div className={"flex flex-row gap-2"}>
+                        <a href={"/"}>{level.title}</a>
+                      </div>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
     </Sidebar>
   );
