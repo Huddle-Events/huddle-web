@@ -2,6 +2,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import RalleyLogo from "@/assets/RalleyIcon.svg";
 import { Button } from "@/components/ui/button.tsx";
+import { useLocation } from "react-router";
 
 const menuChoices: { text: string; url: string }[] = [
   { text: "What's on", url: "/whatson" },
@@ -11,6 +12,8 @@ const menuChoices: { text: string; url: string }[] = [
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  console.log({ location });
   return (
     <div className="bg-background-subtle">
       <header className="fixed top-0 left-0 right-0 z-50 border-b bg-white">

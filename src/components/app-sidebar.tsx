@@ -13,6 +13,7 @@ import { SearchForm } from "@/components/search-form.tsx";
 import { Clock, LucideIcon, Rocket, Users } from "lucide-react";
 import { Separator } from "@/components/ui/separator.tsx";
 import { Button } from "@/components/ui/button.tsx";
+import { useLocation, useNavigate } from "react-router";
 
 const topLevels: { url: string; title: string; icon: LucideIcon }[] = [
   {
@@ -35,30 +36,32 @@ const topLevels: { url: string; title: string; icon: LucideIcon }[] = [
 const industryLevels: { url: string; title: string }[] = [
   {
     title: "Accounting",
-    url: "/accounting",
+    url: "/events?filter=accounting",
   },
   {
     title: "Administration",
-    url: "/administration",
+    url: "/events?filter=administration",
   },
   {
     title: "Agriculture",
-    url: "/agriculture",
+    url: "/events?filter=agriculture",
   },
   {
     title: "Architecture",
-    url: "/architecture",
+    url: "/events?filter=architecture",
   },
   {
     title: "Banking",
-    url: "/banking",
+    url: "/events?filter=banking",
   },
   {
     title: "Communication",
-    url: "/communication",
+    url: "/events?filter=communication",
   },
 ];
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const navigate = useNavigate();
+  const location = useLocation();
   return (
     <Sidebar {...props}>
       <SidebarContent>
@@ -73,7 +76,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     <SidebarMenuButton asChild>
                       <div className={"flex flex-row gap-2"}>
                         <level.icon />
-                        <a href={"/"}>{level.title}</a>
+                        <a href={level.url}>{level.title}</a>
                       </div>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -104,7 +107,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <SidebarMenuItem key={level.title}>
                     <SidebarMenuButton asChild>
                       <div className={"flex flex-row gap-2"}>
-                        <a href={"/"}>{level.title}</a>
+                        <a href={level.url}>{level.title}</a>
                       </div>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
