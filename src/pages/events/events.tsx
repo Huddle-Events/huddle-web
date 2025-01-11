@@ -5,6 +5,7 @@ import image3 from "@/assets/image3.png";
 import image4 from "@/assets/image4.png";
 
 import { EventType } from "@/models/event";
+import { EventDropdownLocation } from "@/components/events/event-dropdown-location.tsx";
 const allEvents: {
   imageUrl: string;
   eventDate: string;
@@ -63,11 +64,16 @@ const allEvents: {
 ];
 const Events = () => {
   return (
-    <div className={"grid grid-cols-[repeat(4,_287px)] gap-2"}>
-      {/*<div className={"grid grid-cols-[repeat(4,_minmax(287px,_1fr))] gap-2"}>*/}
-      {allEvents.map((event) => (
-        <EventCard {...event} key={event.eventTitle} />
-      ))}
+    <div className={"flex flex-col gap-2"}>
+      <div className={"flex flex-row gap-2"}>
+        <EventDropdownLocation />
+      </div>
+      <div className={"grid grid-cols-[repeat(4,_287px)] gap-2"}>
+        {/*<div className={"grid grid-cols-[repeat(4,_minmax(287px,_1fr))] gap-2"}>*/}
+        {allEvents.map((event) => (
+          <EventCard {...event} key={event.eventTitle} />
+        ))}
+      </div>
     </div>
   );
 };
