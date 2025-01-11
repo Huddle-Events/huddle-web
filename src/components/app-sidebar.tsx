@@ -13,7 +13,6 @@ import { SearchForm } from "@/components/search-form.tsx";
 import { Clock, LucideIcon, Rocket, Users } from "lucide-react";
 import { Separator } from "@/components/ui/separator.tsx";
 import { Button } from "@/components/ui/button.tsx";
-import { useLocation, useNavigate } from "react-router";
 
 const topLevels: { url: string; title: string; icon: LucideIcon }[] = [
   {
@@ -60,8 +59,6 @@ const industryLevels: { url: string; title: string }[] = [
   },
 ];
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const navigate = useNavigate();
-  const location = useLocation();
   return (
     <Sidebar {...props}>
       <SidebarContent>
