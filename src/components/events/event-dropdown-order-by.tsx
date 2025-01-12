@@ -27,7 +27,7 @@ const EventDropdownOrderBy = () => {
           <ChevronDown />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 ml-[61px]">
+      <DropdownMenuContent className="w-56">
         <DropdownMenuGroup>
           {orderByList.map((type, i, array) => {
             return (

@@ -8,6 +8,7 @@ import { EventType } from "@/models/event";
 import { EventDropdownLocation } from "@/components/events/event-dropdown-location.tsx";
 import { EventDropdownType } from "@/components/events/event-dropdown-type.tsx";
 import { EventDropdownOrderBy } from "@/components/events/event-dropdown-order-by.tsx";
+import { EventDropdownDate } from "@/components/events/event-dropdown-date.tsx";
 const allEvents: {
   imageUrl: string;
   eventDate: string;
@@ -69,6 +70,7 @@ const Events = () => {
     <div className={"flex flex-col gap-2"}>
       <div className={"flex flex-row gap-2"}>
         <EventDropdownLocation />
+        <EventDropdownDate />
         <EventDropdownType />
         <EventDropdownOrderBy />
       </div>

@@ -32,7 +32,7 @@ const EventDropdownType = () => {
           <ChevronDown />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 ml-[61px]">
+      <DropdownMenuContent>
         <DropdownMenuGroup>
           {eventTypes.map((type, i, array) => {
             return (
