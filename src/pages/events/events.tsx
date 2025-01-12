@@ -6,6 +6,8 @@ import image4 from "@/assets/image4.png";
 
 import { EventType } from "@/models/event";
 import { EventDropdownLocation } from "@/components/events/event-dropdown-location.tsx";
+import { EventDropdownType } from "@/components/events/event-dropdown-type.tsx";
+import { EventDropdownOrderBy } from "@/components/events/event-dropdown-order-by.tsx";
 const allEvents: {
   imageUrl: string;
   eventDate: string;
@@ -67,9 +69,10 @@ const Events = () => {
     <div className={"flex flex-col gap-2"}>
       <div className={"flex flex-row gap-2"}>
         <EventDropdownLocation />
+        <EventDropdownType />
+        <EventDropdownOrderBy />
       </div>
       <div className={"grid grid-cols-[repeat(4,_287px)] gap-2"}>
-        {/*<div className={"grid grid-cols-[repeat(4,_minmax(287px,_1fr))] gap-2"}>*/}
         {allEvents.map((event) => (
           <EventCard {...event} key={event.eventTitle} />
         ))}

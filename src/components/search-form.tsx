@@ -15,7 +15,15 @@ export function SearchForm({ ...props }: React.ComponentProps<"form">) {
           <Label htmlFor="search" className="sr-only">
             Search
           </Label>
-          <SidebarInput id="search" placeholder="Search" className="pl-8" />
+          <SidebarInput
+            autoFocus
+            id="search"
+            placeholder="Search"
+            className="pl-8"
+            onChange={(e) => {
+              e.stopPropagation();
+            }}
+          />
           <Search className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
         </SidebarGroupContent>
       </SidebarGroup>
