@@ -11,8 +11,10 @@ import { cn } from "@/lib/utils";
 import { EventType } from "@/models/event.ts";
 // import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { format } from "date-fns";
+import { useNavigate } from "react-router";
 
 interface EventCardProps {
+  id: string;
   imageUrl: string;
   eventDate: string;
   eventTitle: string;
@@ -23,6 +25,7 @@ interface EventCardProps {
   className?: string;
 }
 const EventCard: React.FC<EventCardProps> = ({
+  id,
   className,
   eventDate,
   eventTitle,
@@ -32,8 +35,14 @@ const EventCard: React.FC<EventCardProps> = ({
   // isFree,
   state,
 }) => {
+  const navigate = useNavigate();
   return (
-    <Card className={cn(className)}>
+    <Card
+      onClick={() => {
+        navigate(`/events/${id}`);
+      }}
+      className={`${cn(className)} cursor-pointer`}
+    >
       <CardContent className={"p-0"}>
         {/*<AspectRatio ratio={4 / 3}>*/}
         <img className={"rounded-t-lg w-full"} src={imageUrl}></img>

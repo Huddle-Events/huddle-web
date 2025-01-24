@@ -4,7 +4,7 @@ import bannerImage from "@/assets/banner-image.png";
 
 const Banner = () => {
   return (
-    <div className="bg-white w-full h-[502px] flex px-10 outline outline-border outline-1">
+    <div className="bg-white w-screen h-[502px] flex px-10 outline outline-border outline-1">
       <div className={"flex flex-col gap-6 w-1/3 mt-20"}>
         <span className="font-semibold text-[46px] leading-[52px] text-[#18181B]">
           Elevate your career with events that matter

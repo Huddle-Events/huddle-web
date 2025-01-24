@@ -10,6 +10,7 @@ import { EventDropdownType } from "@/components/events/event-dropdown-type.tsx";
 import { EventDropdownOrderBy } from "@/components/events/event-dropdown-order-by.tsx";
 import { EventDropdownDate } from "@/components/events/event-dropdown-date.tsx";
 const allEvents: {
+  id: string;
   imageUrl: string;
   eventDate: string;
   eventTitle: string;
@@ -26,6 +27,7 @@ const allEvents: {
     eventType: "Expo",
     imageUrl: image1,
     isFree: false,
+    id: "1",
   },
 
   {
@@ -36,6 +38,7 @@ const allEvents: {
     eventType: "Networking Event",
     imageUrl: image2,
     isFree: false,
+    id: "2",
   },
   {
     state: "QLD",
@@ -45,6 +48,7 @@ const allEvents: {
     eventType: "Seminar",
     imageUrl: image3,
     isFree: false,
+    id: "3",
   },
   {
     state: "QLD",
@@ -54,6 +58,7 @@ const allEvents: {
     eventType: "Conference",
     imageUrl: image4,
     isFree: false,
+    id: "4",
   },
   {
     state: "QLD",
@@ -63,20 +68,21 @@ const allEvents: {
     eventType: "Expo",
     imageUrl: image1,
     isFree: false,
+    id: "5",
   },
 ];
 const Events = () => {
   return (
-    <div className={"flex flex-col gap-2"}>
+    <div className={"flex flex-col gap-2 w-screen"}>
       <div className={"flex flex-row gap-2"}>
         <EventDropdownLocation />
         <EventDropdownDate />
         <EventDropdownType />
         <EventDropdownOrderBy />
       </div>
-      <div className={"grid grid-cols-[repeat(4,_287px)] gap-2"}>
+      <div className={"grid grid-cols-[repeat(auto-fit,_287px)] gap-2"}>
         {allEvents.map((event) => (
-          <EventCard {...event} key={event.eventTitle} />
+          <EventCard {...event} key={event.id} />
         ))}
       </div>
     </div>
