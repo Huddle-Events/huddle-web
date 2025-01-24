@@ -1,6 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { Header } from "@/components/header.tsx";
 import { Banner } from "@/components/banner";
 import { useAuth } from "@/components/context/AuthContext.tsx";
 
@@ -14,7 +13,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     : topPositionWithBanner;
   return (
     <div className="bg-background-subtle">
-      <Header />
       {!isAuthenticated && (
         <div className={"absolute top-[5rem]"}>
           <Banner />
