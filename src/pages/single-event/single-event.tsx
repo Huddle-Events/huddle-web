@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+// import { useParams } from "react-router";
 import EventImage from "@/assets/single-event.png";
 import { AspectRatio } from "@/components/ui/aspect-ratio.tsx";
 import { Image } from "@/components/image.tsx";
@@ -43,7 +43,7 @@ const VisibilitySelector: Record<EventDetailSimple["eventVisibility"], string> =
   };
 
 const SingleEvent = () => {
-  const params = useParams<{ id: string }>();
+  // const params = useParams<{ id: string }>();
   const { isAuthenticated } = useAuth();
   const distance = formatDistance(
     new Date(simpleDetail.eventStartTime),
