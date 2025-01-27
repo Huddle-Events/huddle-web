@@ -8,7 +8,7 @@ import { Header } from "@/components/header.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <div className="bg-white">
+    <div className="bg-white font-sf-pro">
       <AuthProvider>
         <BrowserRouter>
           <Header />

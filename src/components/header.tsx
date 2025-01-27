@@ -23,7 +23,11 @@ export const Header = () => {
         <div className="m-auto">
           {menuChoices.map((choice) => {
             return (
-              <Button variant={"ghost"} key={choice.text}>
+              <Button
+                variant={"ghost"}
+                className={"font-medium text-base text-color-text"}
+                key={choice.text}
+              >
                 {choice.text}
               </Button>
             );
