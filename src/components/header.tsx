@@ -2,9 +2,10 @@ import RalleyLogo from "@/assets/RalleyIcon.svg";
 import { Button } from "@/components/ui/button.tsx";
 import { useAuth } from "@/components/context/AuthContext.tsx";
 import { HeaderAvatar } from "@/components/header-avatar.tsx";
+import { useNavigate } from "react-router";
 
 const menuChoices: { text: string; url: string }[] = [
-  { text: "What's on", url: "/whatson" },
+  { text: "What's on", url: "/app" },
   { text: "Communities", url: "/communities" },
   { text: "Resources", url: "/resources" },
   { text: "Overview", url: "/overview" },
@@ -12,6 +13,7 @@ const menuChoices: { text: string; url: string }[] = [
 
 export const Header = () => {
   const { isAuthenticated, login } = useAuth();
+  const navigate = useNavigate();
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b bg-white">
       <div className="pl-14 h-20 flex">
@@ -27,6 +29,9 @@ export const Header = () => {
                 variant={"ghost"}
                 className={"font-medium text-base text-color-text"}
                 key={choice.text}
+                onClick={() => {
+                  navigate(choice.url);
+                }}
               >
                 {choice.text}
               </Button>

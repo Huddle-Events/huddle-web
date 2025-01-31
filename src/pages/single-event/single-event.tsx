@@ -9,6 +9,7 @@ import { EventBadge } from "@/components/event-badge.tsx";
 import { Separator } from "@/components/ui/separator.tsx";
 import { SingleEventDetail } from "@/pages/single-event/single-event-detail.tsx";
 import { Calendar, Earth, MapPin, Users } from "lucide-react";
+import { EventSidebar } from "@/components/event-sidebar/event-sidebar.tsx";
 
 type EventDetailSimple = {
   imageUrl: string;
@@ -51,59 +52,64 @@ const SingleEvent = () => {
     { includeSeconds: true },
   );
   return (
-    <div className={"flex flex-col gap-3"}>
-      <AspectRatio ratio={21 / 9}>
-        <Image
-          src={simpleDetail.imageUrl}
-          className={"rounded-md object-cover"}
-        />
-      </AspectRatio>
-      <h1 className="text-4xl leading-[48px] font-semibold text-color-text">
-        {simpleDetail.eventTile}
-      </h1>
-      <h2 className="font-inter text-xl font-normal text-color-text leading-8">
-        {simpleDetail.eventSubtitle}
-      </h2>
-      <div className="flex gap-2">
-        {simpleDetail.tags.map((tag) => (
-          <EventBadge key={tag} text={tag} />
-        ))}
-      </div>
-      <div className={"flex gap-2"}>
-        <img src={simpleDetail.hostImageAvatarUrl} alt={"host-avatar"} />
-        <span
-          className={"self-center"}
-        >{`Hosted by: ${simpleDetail.host}`}</span>
-      </div>
-      <Separator />
-      <div className={"grid grid-cols-2 grid-rows-2 gap-2"}>
-        <SingleEventDetail
-          detail={format(
-            new Date(simpleDetail.eventStartTime),
-            "iiii d MMMM yyyy",
-          )}
-          subDetail={`${format(new Date(simpleDetail.eventStartTime), "h aa")} - ${format(new Date(simpleDetail.eventEndTime), "h aa")} (${distance})`}
-          icon={Calendar}
-        />
-        <SingleEventDetail
-          detail={VisibilitySelector[simpleDetail.eventVisibility]}
-          subDetail={"Anyone can attend"}
-          icon={Earth}
-        />
-        {isAuthenticated && (
-          <SingleEventDetail
-            detail={"Brisbane Showground"}
-            subDetail={"600 Gregory TErrace, Bowen hill"}
-            icon={MapPin}
+    <>
+      <aside className="absolute top-28 left-[80%]">
+        <EventSidebar />
+      </aside>
+      <div className={"flex flex-col gap-3  w-4/5"}>
+        <AspectRatio ratio={21 / 9}>
+          <Image
+            src={simpleDetail.imageUrl}
+            className={"rounded-md object-cover"}
           />
-        )}
-        <SingleEventDetail
-          detail={"In-person event"}
-          subDetail={"Anyone can attend"}
-          icon={Users}
-        />
+        </AspectRatio>
+        <h1 className="text-4xl leading-[48px] font-semibold text-color-text">
+          {simpleDetail.eventTile}
+        </h1>
+        <h2 className="font-inter text-xl font-normal text-color-text leading-8">
+          {simpleDetail.eventSubtitle}
+        </h2>
+        <div className="flex gap-2">
+          {simpleDetail.tags.map((tag) => (
+            <EventBadge key={tag} text={tag} />
+          ))}
+        </div>
+        <div className={"flex gap-2"}>
+          <img src={simpleDetail.hostImageAvatarUrl} alt={"host-avatar"} />
+          <span
+            className={"self-center"}
+          >{`Hosted by: ${simpleDetail.host}`}</span>
+        </div>
+        <Separator />
+        <div className={"grid grid-cols-2 grid-rows-2 gap-2"}>
+          <SingleEventDetail
+            detail={format(
+              new Date(simpleDetail.eventStartTime),
+              "iiii d MMMM yyyy",
+            )}
+            subDetail={`${format(new Date(simpleDetail.eventStartTime), "h aa")} - ${format(new Date(simpleDetail.eventEndTime), "h aa")} (${distance})`}
+            icon={Calendar}
+          />
+          <SingleEventDetail
+            detail={VisibilitySelector[simpleDetail.eventVisibility]}
+            subDetail={"Anyone can attend"}
+            icon={Earth}
+          />
+          {isAuthenticated && (
+            <SingleEventDetail
+              detail={"Brisbane Showground"}
+              subDetail={"600 Gregory TErrace, Bowen hill"}
+              icon={MapPin}
+            />
+          )}
+          <SingleEventDetail
+            detail={"In-person event"}
+            subDetail={"Anyone can attend"}
+            icon={Users}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 export { SingleEvent };
