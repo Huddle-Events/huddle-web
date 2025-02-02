@@ -3,13 +3,15 @@ import EventImage from "@/assets/single-event.png";
 import { AspectRatio } from "@/components/ui/aspect-ratio.tsx";
 import { Image } from "@/components/image.tsx";
 import { useAuth } from "@/components/context/AuthContext.tsx";
-import { add, format, formatDistance } from "date-fns";
+import { add, format, formatDistance, sub } from "date-fns";
 import GoogleAvatar from "@/assets/google-avatar.png";
 import { EventBadge } from "@/components/event-badge.tsx";
 import { Separator } from "@/components/ui/separator.tsx";
-import { SingleEventDetail } from "@/pages/single-event/single-event-detail.tsx";
+import { SingleEventDetail } from "@/components/single-event/single-event-detail.tsx";
 import { Calendar, Earth, MapPin, Users } from "lucide-react";
 import { EventSidebar } from "@/components/event-sidebar/event-sidebar.tsx";
+import { useState } from "react";
+import { SingleEventTabs } from "@/components/single-event/single-event-tabs.tsx";
 
 type EventDetailSimple = {
   imageUrl: string;
@@ -33,9 +35,40 @@ const simpleDetail: EventDetailSimple = {
   hostImageAvatarUrl: GoogleAvatar,
   imageUrl: EventImage,
   tags: ["Technology", "Development", "Seminar"],
-  eventStartTime: new Date().toISOString(),
-  eventEndTime: add(new Date(), { hours: 3, minutes: 40 }).toISOString(),
+  eventStartTime: add(new Date().toISOString(), { weeks: 2 }).toISOString(),
+  eventEndTime: add(new Date(), {
+    weeks: 2,
+    hours: 3,
+    minutes: 40,
+  }).toISOString(),
 };
+
+const anchorLinks: { text: string; anchorLink: string }[] = [
+  {
+    text: "About",
+    anchorLink: "#about",
+  },
+  {
+    text: "Location",
+    anchorLink: "#location",
+  },
+  {
+    text: "Presenters",
+    anchorLink: "#presenters",
+  },
+  {
+    text: "Agenda",
+    anchorLink: "#agenda",
+  },
+  {
+    text: "Partners & Sponsors",
+    anchorLink: "#partners",
+  },
+  {
+    text: "FAQ",
+    anchorLink: "#faq",
+  },
+];
 
 const VisibilitySelector: Record<EventDetailSimple["eventVisibility"], string> =
   {
@@ -44,17 +77,27 @@ const VisibilitySelector: Record<EventDetailSimple["eventVisibility"], string> =
   };
 
 const SingleEvent = () => {
-  // const params = useParams<{ id: string }>();
+  const [saved, setIsSaved] = useState(false);
   const { isAuthenticated } = useAuth();
   const distance = formatDistance(
     new Date(simpleDetail.eventStartTime),
     new Date(simpleDetail.eventEndTime),
     { includeSeconds: true },
   );
+
   return (
     <>
       <aside className="absolute top-28 left-[80%]">
-        <EventSidebar />
+        <EventSidebar
+          endDate={sub(new Date(simpleDetail.eventStartTime), { days: 3 })}
+          isSaved={saved}
+          price={15}
+          numberOfSpotLeft={6}
+          numberOfAttendants={12}
+          numberOfInterested={9}
+          anchorLinks={anchorLinks}
+          setIsSaved={() => setIsSaved((prev) => !prev)}
+        />
       </aside>
       <div className={"flex flex-col gap-3  w-4/5"}>
         <AspectRatio ratio={21 / 9}>
@@ -108,6 +151,7 @@ const SingleEvent = () => {
             icon={Users}
           />
         </div>
+        <SingleEventTabs />
       </div>
     </>
   );
