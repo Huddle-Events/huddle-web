@@ -1,3 +1,16 @@
+type EventDetailSimple = {
+  imageUrl: string;
+  eventTile: string;
+  eventSubtitle: string;
+  tags: string[];
+  host: string;
+  hostImageAvatarUrl: string;
+  eventStartTime: string;
+  eventEndTime: string;
+  eventVisibility: "public" | "private";
+  eventAttendanceType: "anyone" | "exclusive";
+};
+
 type Agenda = {
   startTime: string;
   endTime: string;
@@ -36,5 +49,27 @@ type Location = {
   latitude: number;
   longitude: number;
   address: Address;
+  venueName: string;
 };
-export type { Agenda, Faq, Presenter, Partner, Address, Location };
+
+type AnchorLink = { text: string; anchorLink: string };
+type DetailedEvent = {
+  anchors: AnchorLink[];
+  location: Location;
+  about: string;
+  agenda: Agenda[];
+  presenters: Presenter[];
+  partners: Partner[];
+  faqs: Faq[];
+};
+export type {
+  AnchorLink,
+  DetailedEvent,
+  EventDetailSimple,
+  Agenda,
+  Faq,
+  Presenter,
+  Partner,
+  Address,
+  Location,
+};

@@ -8,34 +8,17 @@ import {
 } from "@/components/ui/card";
 import React from "react";
 import { cn } from "@/lib/utils";
-import { EventType } from "@/models/event.ts";
-// import { AspectRatio } from "@radix-ui/react-aspect-ratio";
+import { Event } from "@/models/event.ts";
 import { format } from "date-fns";
 import { useNavigate } from "react-router";
 
 interface EventCardProps {
-  id: string;
-  imageUrl: string;
-  eventDate: string;
-  eventTitle: string;
-  city: string;
-  state: string;
-  eventType: EventType;
-  isFree?: boolean;
+  card: Event;
   className?: string;
 }
-const EventCard: React.FC<EventCardProps> = ({
-  id,
-  className,
-  eventDate,
-  eventTitle,
-  eventType,
-  city,
-  imageUrl,
-  // isFree,
-  state,
-}) => {
+const EventCard: React.FC<EventCardProps> = ({ card, className }) => {
   const navigate = useNavigate();
+  const { id, eventDate, eventTitle, eventType, city, imageUrl, state } = card;
   return (
     <Card
       onClick={() => {
