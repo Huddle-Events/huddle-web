@@ -7,8 +7,8 @@ type Props = {
 };
 const SingleEventTabs = ({ detailedEvent }: Props) => {
   return (
-    <Tabs defaultValue="details" className="">
-      <TabsList>
+    <Tabs defaultValue="details">
+      <TabsList className="text-color-text bg-white text-base font-semibold font-inter">
         <TabsTrigger value="details">Details</TabsTrigger>
         <TabsTrigger value="discussion">Discussion</TabsTrigger>
       </TabsList>
