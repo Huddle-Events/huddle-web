@@ -6,17 +6,20 @@ type Agenda = {
 };
 
 type Presenter = {
+  id: string;
   fullName: string;
   description: string;
   imageUrl: string;
 };
 
 type Partner = {
+  id: string;
   name: string;
   imageUrl: string;
 };
 
 type Faq = {
+  id: string;
   question: string;
   answer: string;
 };

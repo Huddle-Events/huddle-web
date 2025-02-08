@@ -1,3 +1,6 @@
+import { SingleEventFaq } from "@/components/single-event/single-event-faq.tsx";
+import { SingleEventPartners } from "@/components/single-event/single-event-partners.tsx";
+import { SingleEventPresenters } from "@/components/single-event/single-event-presenters.tsx";
 import {
   Agenda,
   Faq,
@@ -8,6 +11,14 @@ import {
 import { PropsWithChildren } from "react";
 import { SingleEventAgendaAccordion } from "./single-event-agenda-accordion";
 import { add } from "date-fns";
+import { v4 as uuidV4 } from "uuid";
+import presenter1 from "@/assets/presenter-1.png";
+import presenter2 from "@/assets/presenter-2.png";
+import presenter3 from "@/assets/presenter-3.png";
+
+import shell from "@/assets/shells.png";
+import smartfinder from "@/assets/smartfinder.png";
+import zoomer from "@/assets/zoomer.png";
 
 // @ts-ignore
 type Props = {
@@ -67,6 +78,82 @@ const agenda: Agenda[] = [
   },
 ];
 
+const loremPresenter =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.";
+const presenters: Presenter[] = [
+  {
+    id: uuidV4(),
+    fullName: "Darrell Steward",
+    imageUrl: presenter1,
+    description: loremPresenter,
+  },
+  {
+    id: uuidV4(),
+    fullName: "Darrell Steward",
+    imageUrl: presenter2,
+    description: loremPresenter,
+  },
+  {
+    id: uuidV4(),
+    fullName: "Darrell Steward",
+    imageUrl: presenter3,
+    description: loremPresenter,
+  },
+];
+
+const partners: Partner[] = [
+  {
+    id: uuidV4(),
+    imageUrl: shell,
+    name: "Shells",
+  },
+
+  {
+    id: uuidV4(),
+    imageUrl: smartfinder,
+    name: "SmartFinder",
+  },
+  {
+    id: uuidV4(),
+    imageUrl: zoomer,
+    name: "Zoomer",
+  },
+];
+
+const faqs: Faq[] = [
+  {
+    id: uuidV4(),
+    question: "What does the course provide me on the day of commencement?",
+    answer: loremShort,
+  },
+  {
+    id: uuidV4(),
+    question: "What experience does Instructor has?",
+    answer: loremShort,
+  },
+  {
+    id: uuidV4(),
+    question:
+      "Do you provide a group discount for classroom training programs?",
+    answer: loremShort,
+  },
+  {
+    id: uuidV4(),
+    question: "If I cancel my Enrolment, how can I claim my refund?",
+    answer: loremShort,
+  },
+  {
+    id: uuidV4(),
+    question: "How do I get there by public transport?",
+    answer: loremShort,
+  },
+  {
+    id: uuidV4(),
+    question: "Who do I contact if I have more questions?",
+    answer: loremShort,
+  },
+];
+
 const Section = ({
   title,
   children,
@@ -108,9 +195,15 @@ const SingleEventTabDetail = () => {
       <Section id="agenda" title={"Agenda"}>
         <SingleEventAgendaAccordion agenda={agenda} />
       </Section>
-      <div id="presenters">Presenters</div>
-      <div id="partners">Parterns</div>
-      <div id="faq">FAQ</div>
+      <Section id="presenters" title={"Presenters"}>
+        <SingleEventPresenters presenters={presenters} />
+      </Section>
+      <Section id="partners" title={"Partners & Sponsors"}>
+        <SingleEventPartners partners={partners} />
+      </Section>
+      <Section id="faq" title={"Frequently Asked Questions"}>
+        <SingleEventFaq questions={faqs} />
+      </Section>
     </div>
   );
 };

@@ -24,10 +24,10 @@ const SingleEventAgendaAccordion = ({ agenda }: Props) => {
             <span
               className={"text-sm font-normal text-muted mx-2"}
             >{`${format(new Date(ag.startTime), formatDate)}-${format(new Date(ag.endTime), formatDate)}`}</span>
-            <AccordionTrigger className={"font-semibold mx-2"}>
+            <AccordionTrigger className={"font-semibold mx-2 h-0 mb-3"}>
               {ag.title}
             </AccordionTrigger>
-            <AccordionContent>{ag.summary}</AccordionContent>
+            <AccordionContent className="px-2">{ag.summary}</AccordionContent>
           </AccordionItem>
         );
       })}
