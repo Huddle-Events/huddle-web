@@ -1,6 +1,6 @@
 type EventDetailSimple = {
   imageUrl: string;
-  eventTile: string;
+  eventTitle: string;
   eventSubtitle: string;
   tags: string[];
   host: string;

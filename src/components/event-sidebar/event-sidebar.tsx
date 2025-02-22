@@ -65,6 +65,7 @@ type Props = {
   numberOfInterested: number;
   anchorLinks: { text: string; anchorLink: string }[];
   setIsSaved: () => void;
+  eventTitle: string;
 };
 const EventSidebar = ({
   endDate,
@@ -75,12 +76,13 @@ const EventSidebar = ({
   price,
   anchorLinks,
   setIsSaved,
+  eventTitle,
 }: Props) => {
   return (
     <div className="w-[327px] h-fit pb-3 gap-4 flex flex-col rounded-md bg-white shadow-lg border">
       <div className="h-[calc(3*62px)] p-3 w-full flex flex-col gap-4">
         <div className={"flex justify-around"}>
-          <EventShareDialog />
+          <EventShareDialog eventTitle={eventTitle} />
           <Button
             onClick={() => {
               setIsSaved();

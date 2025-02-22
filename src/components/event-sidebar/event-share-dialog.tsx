@@ -1,39 +1,64 @@
+import facebook from "@/assets/Facebook.png";
+import google from "@/assets/google-avatar.png";
+import linkedin from "@/assets/LinkedIn.png";
 import { ShareLinkInput } from "@/components/event-sidebar/share-link-input.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
 import { DialogTrigger } from "@radix-ui/react-dialog";
-import { Linkedin, Share } from "lucide-react";
-import linkedin from "@/assets/LinkedIn.png";
-const EventShareDialog = () => {
-  const handleWebShare = async (
-    eventTitle: string,
-    eventDescription: string,
-    eventUrl: string,
-  ) => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: eventTitle,
-          text: eventDescription,
-          url: eventUrl,
-        });
-      } catch (error) {
-        console.log("Sharing failed:", error);
-      }
-    }
+import { Mail, Share } from "lucide-react";
+
+type Props = {
+  eventTitle: string;
+};
+
+const EventShareDialog = ({ eventTitle }: Props) => {
+  const shareToGmail = (eventTitle: string, eventUrl: string) => {
+    const subject = encodeURIComponent(eventTitle);
+    const body = encodeURIComponent(`Check out this event: ${eventUrl}`);
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&su=${subject}&body=${body}`;
+    window.open(gmailUrl, "_blank", "width=600,height=600");
   };
 
-  const shareToLinkedIn = (eventUrl: string) => {
-    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(eventUrl)}`;
+  const shareToLinkedIn = (
+    eventUrl: string,
+    eventTitle: string,
+    eventDescription: string,
+  ) => {
+    const params = new URLSearchParams({
+      url: eventUrl,
+      title: eventTitle,
+      summary: eventDescription,
+      source: window.location.hostname,
+    });
+    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?${params}`;
     window.open(linkedInUrl, "_blank", "width=600,height=600");
   };
 
+  const shareToFacebook = (
+    eventUrl: string,
+    eventTitle: string,
+    eventDescription: string,
+  ) => {
+    const params = new URLSearchParams({
+      u: eventUrl,
+      quote: `${eventTitle}\n${eventDescription}`,
+      hashtag: "#ralley-event",
+    });
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?${params}`;
+    window.open(facebookUrl, "_blank", "width=600,height=600");
+  };
+
+  const shareByEmail = (eventTitle: string, eventUrl: string) => {
+    const subject = encodeURIComponent(eventTitle);
+    const body = encodeURIComponent(`Check out this event: ${eventUrl}`);
+    const mailtoUrl = `mailto:?subject=${subject}&body=${body}`;
+    window.location.href = mailtoUrl;
+  };
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -43,23 +68,58 @@ const EventShareDialog = () => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Share link</DialogTitle>
-          <DialogDescription>
-            Anyone who has this link will be able to view this.
-          </DialogDescription>
+          <DialogTitle className={"mx-auto"}>
+            Shared this event with your friends
+          </DialogTitle>
         </DialogHeader>
-        {/*<Button*/}
-        {/*  onClick={() => {*/}
-        {/*    shareToLinkedIn(window.location.href);*/}
-        {/*  }}*/}
-        {/*  variant="outline"*/}
-        {/*  className="w-[20%]"*/}
-        {/*>*/}
-        {/*  /!*<Linkedin className="mr-2 h-4 w-4" /> Share on LinkedIn*!/*/}
-        {/*</Button>*/}
 
-        <div className={""}>
-          <img src={linkedin} alt={"linkedin"} />
+        <div className={"flex gap-4 mx-auto"}>
+          <div
+            className={"cursor-pointer pt-2"}
+            onClick={() => {
+              shareToGmail("Please check this link", window.location.href);
+            }}
+          >
+            <img src={google} alt={"gmail"} />
+          </div>
+          <div
+            className={"cursor-pointer rounded-full p-2 border"}
+            onClick={() => {
+              shareToLinkedIn(
+                window.location.href,
+                eventTitle,
+                "Please check out this event!",
+              );
+            }}
+          >
+            <img src={linkedin} alt={"linkedin"} />
+          </div>
+          <div
+            className={"cursor-pointer rounded-full p-2 border"}
+            onClick={() => {
+              shareToFacebook(
+                window.location.href,
+                eventTitle,
+                "Please check out this event!",
+              );
+            }}
+          >
+            <img src={facebook} alt={"facebook"} />
+          </div>
+          <div
+            className={
+              "cursor-pointer rounded-full p-2 pl-2.5 border w-12 h-12"
+            }
+          >
+            <Mail
+              color={"white"}
+              fill={"#18181B"}
+              size={28}
+              onClick={() => {
+                shareByEmail(eventTitle, window.location.href);
+              }}
+            />
+          </div>
         </div>
         <ShareLinkInput eventUrl={window.location.href} />
       </DialogContent>

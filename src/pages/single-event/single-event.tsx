@@ -68,6 +68,7 @@ const SingleEvent = () => {
           numberOfInterested={simpleDetail.numberOfInterested}
           anchorLinks={detailedEvent?.anchors ?? []}
           setIsSaved={() => setIsSaved((prev) => !prev)}
+          eventTitle={simpleDetail.eventTitle}
         />
       </aside>
       <div className={"flex flex-col gap-3  w-4/5"}>
@@ -78,7 +79,7 @@ const SingleEvent = () => {
           />
         </AspectRatio>
         <h1 className="text-4xl leading-[48px] font-semibold text-color-text">
-          {simpleDetail.eventTile}
+          {simpleDetail.eventTitle}
         </h1>
         <h2 className="font-inter text-xl font-normal text-color-text leading-8">
           {simpleDetail.eventSubtitle}

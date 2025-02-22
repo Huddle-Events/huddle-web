@@ -33,7 +33,7 @@ export const getSimpleEvent = (eventId: string) => async () => {
     eventAttendanceType: "anyone",
     eventVisibility: "public",
     eventSubtitle: "Seminar at the Powerhouse, Brisbane",
-    eventTile: "Annual Developers Conference",
+    eventTitle: "Annual Developers Conference",
     host: "Google",
     hostImageAvatarUrl: GoogleAvatar,
     imageUrl: EventImage,

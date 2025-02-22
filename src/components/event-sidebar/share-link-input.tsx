@@ -29,10 +29,16 @@ const ShareLinkInput = ({ eventUrl }: Props) => {
           readOnly
         />
         {copied ? (
-          <Check className={"absolute right-4 top-2"} />
+          <Check
+            color={"#71717A"}
+            size={20}
+            className={"absolute right-4 top-2"}
+          />
         ) : (
           <Files
             className={"cursor-pointer absolute right-4 top-2"}
+            color={"#71717A"}
+            size={20}
             onClick={async () => {
               await copyToClipboard(eventUrl);
             }}
