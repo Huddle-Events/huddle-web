@@ -24,6 +24,12 @@ import zoomer from "@/assets/zoomer.png";
 export const getSimpleEvent = (eventId: string) => async () => {
   console.log(`Fetching event ${eventId}`);
   const simpleDetail: EventDetailSimple = {
+    isSaved: false,
+    numberOfAttendant: 12,
+    numberOfInterested: 9,
+    numberOfSpotLeft: 6,
+    ticketPrice: 15,
+    ticketSalesEnd: add(new Date(), { weeks: 1 }).toISOString(),
     eventAttendanceType: "anyone",
     eventVisibility: "public",
     eventSubtitle: "Seminar at the Powerhouse, Brisbane",
@@ -45,7 +51,6 @@ export const getSimpleEvent = (eventId: string) => async () => {
 };
 
 export const getEventAuthenticated = (eventId: string) => async () => {
-  console.log(`Fetching authenticated event for ${eventId}`);
   const about: string =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sagittis risus leo, vitae sollicitudin enim sollicitudin ut. Sed congue ligula id ex semper commodo. Proin tristique in turpis vel eleifend. Proin gravida dolor sit amet neque vulputate, non convallis felis euismod. Donec luctus felis at consequat imperdiet. Proin ut lorem finibus, mattis justo a, lobortis quam. Suspendisse sagittis ante eu neque bibendum, vel tristique erat accumsan. Pellentesque neque purus, convallis vitae diam sed, facilisis vestibulum nisi. Ut malesuada diam id feugiat bibendum. Nunc quis congue lorem, vel imperdiet nisl. Praesent nec blandit leo. Nam in ex tortor. In vitae leo convallis, elementum urna sit amet, tempus metus. Suspendisse fringilla vitae erat non fringilla. Vestibulum at vestibulum sapien.\n";
   const location: Location = {

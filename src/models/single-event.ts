@@ -9,6 +9,12 @@ type EventDetailSimple = {
   eventEndTime: string;
   eventVisibility: "public" | "private";
   eventAttendanceType: "anyone" | "exclusive";
+  ticketSalesEnd: string;
+  numberOfSpotLeft: number;
+  numberOfAttendant: number;
+  numberOfInterested: number;
+  ticketPrice: number;
+  isSaved: boolean;
 };
 
 type Agenda = {

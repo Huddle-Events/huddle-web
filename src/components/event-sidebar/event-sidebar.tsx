@@ -1,7 +1,47 @@
+import { EventShareDialog } from "@/components/event-sidebar/event-share-dialog.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Share, Heart } from "lucide-react";
 import { Separator } from "@/components/ui/separator.tsx";
 import { format } from "date-fns";
+import { useState } from "react";
+
+type ShareButtonProps = {
+  title: string;
+  text: string;
+  url: string;
+};
+// const ShareButton = ({
+//   title,
+//   text,
+//   url,
+// }: ShareButtonProps): React.ReactNode => {
+//   const handleShare = async () => {
+//     if (navigator.share) {
+//       try {
+//         await navigator.share({
+//           title,
+//           text,
+//           url,
+//         });
+//       } catch (error) {
+//         // User cancelled or sharing failed
+//         console.log("Sharing failed:", error);
+//       }
+//     } else {
+//       // Fallback: copy to clipboard
+//       await navigator.clipboard.writeText(url);
+//     }
+//   };
+//   return (
+//     <Button
+//       onClick={handleShare}
+//       variant={"ghost"}
+//       className={"text-base leading-6"}
+//     >
+//       <Share /> Share
+//     </Button>
+//   );
+// };
 
 const Section = ({ text, subtitle }: { text: string; subtitle: string }) => {
   return (
@@ -40,9 +80,7 @@ const EventSidebar = ({
     <div className="w-[327px] h-fit pb-3 gap-4 flex flex-col rounded-md bg-white shadow-lg border">
       <div className="h-[calc(3*62px)] p-3 w-full flex flex-col gap-4">
         <div className={"flex justify-around"}>
-          <Button variant={"ghost"} className={"text-base leading-6"}>
-            <Share /> Share
-          </Button>
+          <EventShareDialog />
           <Button
             onClick={() => {
               setIsSaved();

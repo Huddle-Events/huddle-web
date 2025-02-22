@@ -7,13 +7,13 @@ import { Image } from "@/components/image.tsx";
 import { useAuth } from "@/components/context/AuthContext.tsx";
 import { EventDetailSimple } from "@/models/single-event.ts";
 import { useQuery } from "@tanstack/react-query";
-import { format, formatDistance, sub } from "date-fns";
+import { format, formatDistance } from "date-fns";
 import { EventBadge } from "@/components/event-badge.tsx";
 import { Separator } from "@/components/ui/separator.tsx";
 import { SingleEventDetail } from "@/components/single-event/single-event-detail.tsx";
 import { Calendar, Earth, MapPin, Users } from "lucide-react";
 import { EventSidebar } from "@/components/event-sidebar/event-sidebar.tsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SingleEventTabs } from "@/components/single-event/single-event-tabs.tsx";
 import { useParams } from "react-router";
 
@@ -27,11 +27,17 @@ const SingleEvent = () => {
   const [saved, setIsSaved] = useState(false);
   const params = useParams<{ eventId: string }>();
   const { isAuthenticated } = useAuth();
+
   const { data: simpleDetail, status } = useQuery({
     queryFn: getSimpleEvent(params.eventId ?? ""),
     queryKey: ["get-simple-event"],
     enabled: params.eventId !== undefined,
   });
+
+  useEffect(() => {
+    if (status === "success") setIsSaved(simpleDetail?.isSaved ?? false);
+  }, [status, simpleDetail]);
+
   const { data: detailedEvent } = useQuery({
     queryFn: getEventAuthenticated(params.eventId ?? ""),
     queryKey: ["get-event-authenticated"],
@@ -54,12 +60,12 @@ const SingleEvent = () => {
     <>
       <aside className="absolute top-28 left-[80%]">
         <EventSidebar
-          endDate={sub(new Date(simpleDetail.eventStartTime), { days: 3 })}
+          endDate={new Date(simpleDetail.eventEndTime)}
           isSaved={saved}
-          price={15}
-          numberOfSpotLeft={6}
-          numberOfAttendants={12}
-          numberOfInterested={9}
+          price={simpleDetail.ticketPrice}
+          numberOfSpotLeft={simpleDetail.numberOfSpotLeft}
+          numberOfAttendants={simpleDetail.numberOfAttendant}
+          numberOfInterested={simpleDetail.numberOfInterested}
           anchorLinks={detailedEvent?.anchors ?? []}
           setIsSaved={() => setIsSaved((prev) => !prev)}
         />
