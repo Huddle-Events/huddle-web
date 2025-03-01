@@ -1,3 +1,5 @@
+import { CreateEvent } from "@/pages/create-event/create-event.tsx";
+import { GetStarted } from "@/pages/create-event/get-started.tsx";
 import { Navigate, Route, Routes } from "react-router";
 import { MainEvent } from "@/pages/events/main-event.tsx";
 import { Events } from "@/pages/events/events.tsx";
@@ -16,6 +18,13 @@ function App() {
         <Route path={"events"} element={<SingleEventLayout />}>
           <Route path=":eventId" element={<SingleEvent />} />
           <Route path="" element={<Navigate to="/app" replace />} />
+        </Route>
+        <Route path="/create-event" element={<CreateEvent />}>
+          <Route path="get-started" element={<GetStarted />} />
+          <Route
+            path="/create-event"
+            element={<Navigate to={"/create-event/get-started"} replace />}
+          />
         </Route>
         <Route path="*" element={<Navigate to={"/app"} replace />} />
       </Routes>

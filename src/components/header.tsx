@@ -40,7 +40,13 @@ export const Header = () => {
         </div>
         {isAuthenticated ? (
           <div className="ml-auto my-auto mr-3 flex flex-row">
-            <Button className={"text-primary"} variant={"ghost"}>
+            <Button
+              className={"text-primary"}
+              variant={"ghost"}
+              onClick={() => {
+                navigate("/create-event");
+              }}
+            >
               Create
             </Button>
             <HeaderAvatar />
@@ -50,9 +56,7 @@ export const Header = () => {
             <Button variant={"ghost"} onClick={login}>
               Login
             </Button>
-            <Button className={"text-primary"} variant={"ghost"}>
-              Create
-            </Button>
+
             <Button variant={"default"}>Sign up</Button>
           </div>
         )}
