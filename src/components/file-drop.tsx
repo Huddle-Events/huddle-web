@@ -89,7 +89,7 @@ export const FileDrop = () => {
         ));
         return (
           <section className={"container"}>
-            <div {...getRootProps({ style })}>
+            <div {...getRootProps({ style: style as any })}>
               <input {...getInputProps()} />
               <div className={"relative h-[200px]"}>
                 <Image
