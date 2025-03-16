@@ -95,6 +95,7 @@
     --dropdown-border-separator: 214, 32%, 91%;
     --elevated: 210, 40%, 96%;
     --disabled: 240, 5%, 67%;
+    --icon-muted: 240, 7%, 48%;
   }
 
   .dark {

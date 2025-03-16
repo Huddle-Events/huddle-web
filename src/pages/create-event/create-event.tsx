@@ -1,11 +1,12 @@
 import { CreateEventHeader } from "@/components/create-event/create-event-header.tsx";
 import { CreateEventSideBar } from "@/components/create-event/create-event-side-bar.tsx";
 import { SidebarProvider } from "@/components/ui/sidebar.tsx";
+import { CreateEventProvider } from "@/contexts/create-event-context.tsx";
 import { Outlet } from "react-router";
 
 const CreateEvent = () => {
   return (
-    <div>
+    <CreateEventProvider>
       <CreateEventHeader />
       <SidebarProvider>
         <CreateEventSideBar
@@ -17,7 +18,7 @@ const CreateEvent = () => {
           </div>
         </main>
       </SidebarProvider>
-    </div>
+    </CreateEventProvider>
   );
 };
 

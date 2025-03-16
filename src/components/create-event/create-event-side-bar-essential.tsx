@@ -10,23 +10,23 @@ import {
 const essentialSections: { url: string; title: string }[] = [
   {
     title: "Title & Cover",
-    url: "/title",
+    url: "title",
   },
   {
     title: "Audience",
-    url: "/audience",
+    url: "audience",
   },
   {
     title: "Time & Location",
-    url: "/time",
+    url: "time",
   },
   {
     title: "Tickets",
-    url: "/tickets",
+    url: "tickets",
   },
   {
     title: "People",
-    url: "/people",
+    url: "people",
   },
 ];
 
