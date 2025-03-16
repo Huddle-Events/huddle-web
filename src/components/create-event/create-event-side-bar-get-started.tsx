@@ -9,7 +9,7 @@ import {
 const getStartedSections: { url: string; title: string }[] = [
   {
     title: "Get Started",
-    url: "create-event/get-started",
+    url: "get-started",
   },
 ];
 
