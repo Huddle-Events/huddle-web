@@ -1,3 +1,4 @@
+import { CreateEventTitle } from "@/components/create-event/create-event-title.tsx";
 import { FileDrop } from "@/components/file-drop.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {
@@ -15,7 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-export const TitleCover = () => {
+export const CreateEventFormTitleCover = () => {
   const form = useForm<z.infer<typeof TitleFormSchema>>({
     resolver: zodResolver(TitleFormSchema),
     defaultValues: {
@@ -23,19 +24,20 @@ export const TitleCover = () => {
       type: "",
     },
   });
-  const { setTitle } = useCreateEvent();
+  const { setCreateEventParams } = useCreateEvent();
   function onSubmit(values: TitleForm) {
-    setTitle(values);
+    setCreateEventParams((params) => {
+      return { ...params, title: values };
+    });
   }
   return (
     <div className={"flex flex-col gap-4 pr-3"}>
-      <div className="flex flex-col gap-2">
-        <h2 className={"text-3xl font-semibold"}>Title & Cover</h2>
-        <p className="text-iconMuted font-normal text-gray-800">
-          Create an attractive title and cover photo for your event to capture
-          the attention of your target audience.
-        </p>
-      </div>
+      <CreateEventTitle
+        title={"Title & Cover"}
+        description={
+          "Create an attractive title and cover photo for your event to capture the attention of your target audience."
+        }
+      />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-6">

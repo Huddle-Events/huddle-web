@@ -1,12 +1,10 @@
-import { CreateEvent } from "@/pages/create-event/create-event.tsx";
-import { GetStarted } from "@/pages/create-event/get-started.tsx";
-import { TitleCover } from "@/pages/create-event/title-cover.tsx";
-import { Navigate, Route, Routes } from "react-router";
-import { MainEvent } from "@/pages/events/main-event.tsx";
+import { CreateEventRouter } from "@/pages/create-event/create-event-router.tsx";
 import { Events } from "@/pages/events/events.tsx";
-import { SingleEvent } from "@/pages/single-event/single-event.tsx";
+import { MainEvent } from "@/pages/events/main-event.tsx";
 import { SingleEventLayout } from "@/pages/single-event/single-event-layout.tsx";
+import { SingleEvent } from "@/pages/single-event/single-event.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Navigate, Route, Routes } from "react-router";
 
 const queryClient = new QueryClient();
 function App() {
@@ -20,14 +18,7 @@ function App() {
           <Route path=":eventId" element={<SingleEvent />} />
           <Route path="" element={<Navigate to="/app" replace />} />
         </Route>
-        <Route path="/create-event" element={<CreateEvent />}>
-          <Route path="get-started" element={<GetStarted />} />
-          <Route path="title" element={<TitleCover />} />
-          <Route
-            path="/create-event"
-            element={<Navigate to={"/create-event/get-started"} replace />}
-          />
-        </Route>
+        {CreateEventRouter()}
         <Route path="*" element={<Navigate to={"/app"} replace />} />
       </Routes>
     </QueryClientProvider>

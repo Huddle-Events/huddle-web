@@ -1,9 +1,9 @@
-import { TitleForm } from "@/models/create-event";
+import { CreateEventForm } from "@/models/create-event";
 import { createContext, useState, ReactNode, useContext } from "react";
 
 interface CreateEventContextProps {
-  title: TitleForm | undefined;
-  setTitle: (title: TitleForm) => void;
+  createEventParams: CreateEventForm;
+  setCreateEventParams: React.Dispatch<React.SetStateAction<CreateEventForm>>;
   setFiles: (files: File[]) => void;
   files: File[];
 }
@@ -13,10 +13,20 @@ export const CreateEventContext = createContext<
 >(undefined);
 
 export const CreateEventProvider = ({ children }: { children: ReactNode }) => {
-  const [title, setTitle] = useState<TitleForm | undefined>(undefined);
+  const [createEventParams, setCreateEventParams] = useState<CreateEventForm>(
+    {} as CreateEventForm,
+  );
+
   const [files, setFiles] = useState<File[]>([]);
   return (
-    <CreateEventContext.Provider value={{ files, title, setFiles, setTitle }}>
+    <CreateEventContext.Provider
+      value={{
+        files,
+        createEventParams,
+        setCreateEventParams,
+        setFiles,
+      }}
+    >
       {children}
     </CreateEventContext.Provider>
   );

@@ -2,7 +2,7 @@ import GetStartedWelcome from "@/assets/get-started-welcome.png";
 import { Button } from "@/components/ui/button.tsx";
 import { useNavigate } from "react-router";
 
-export const GetStarted = () => {
+export const CreateEventFormGetStarted = () => {
   const navigate = useNavigate();
   return (
     <div className={"flex gap-2 h-auto"}>

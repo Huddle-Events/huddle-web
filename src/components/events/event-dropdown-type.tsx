@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { EventType, eventTypes } from "@/models/event.ts";
+import { EventType, EventTypes } from "@/models/event.ts";
 
 const EventDropdownType = () => {
   const [selectedType, setSelectedType] = useState<EventType | undefined>();
@@ -34,7 +34,7 @@ const EventDropdownType = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          {eventTypes.map((type, i, array) => {
+          {EventTypes.map((type, i, array) => {
             return (
               <>
                 <DropdownMenuItem

@@ -1,4 +1,4 @@
-export const eventTypes = [
+export const EventTypes = [
   "Seminar",
   "Conference",
   "Webinar",
@@ -7,7 +7,7 @@ export const eventTypes = [
   "Expo",
 ] as const;
 
-type EventType = (typeof eventTypes)[number];
+type EventType = (typeof EventTypes)[number];
 type Event = {
   id: string;
   imageUrl: string;
@@ -18,4 +18,5 @@ type Event = {
   eventType: EventType;
   isFree?: boolean;
 };
+
 export type { Event, EventType };

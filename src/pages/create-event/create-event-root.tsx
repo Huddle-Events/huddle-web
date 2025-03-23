@@ -4,7 +4,7 @@ import { SidebarProvider } from "@/components/ui/sidebar.tsx";
 import { CreateEventProvider } from "@/contexts/create-event-context.tsx";
 import { Outlet } from "react-router";
 
-const CreateEvent = () => {
+const CreateEventRoot = () => {
   return (
     <CreateEventProvider>
       <CreateEventHeader />
@@ -22,4 +22,4 @@ const CreateEvent = () => {
   );
 };
 
-export { CreateEvent };
+export { CreateEventRoot };
