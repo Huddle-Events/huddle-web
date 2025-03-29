@@ -14,6 +14,7 @@ import { useCreateEvent } from "@/contexts/create-event-context.tsx";
 import { TitleForm, TitleFormSchema } from "@/models/create-event.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { z } from "zod";
 
 export const CreateEventFormTitleCover = () => {
@@ -24,11 +25,13 @@ export const CreateEventFormTitleCover = () => {
       type: "",
     },
   });
+  const navigate = useNavigate();
   const { setCreateEventParams } = useCreateEvent();
   function onSubmit(values: TitleForm) {
     setCreateEventParams((params) => {
       return { ...params, title: values };
     });
+    navigate("/create-event/audience");
   }
   return (
     <div className={"flex flex-col gap-4 pr-3"}>
