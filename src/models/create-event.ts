@@ -31,9 +31,20 @@ export const AudienceFormSchema = z.object({
 
 export type AudienceForm = z.infer<typeof AudienceFormSchema>;
 
+export const TimeFormSchema = z.object({
+  startDate: z.date().optional(),
+  endDate: z.date().optional(),
+  isRecurring: z.boolean().optional(),
+  location: z.string().optional(),
+  virtualAttendanceLink: z.string(),
+});
+
+export type TimeForm = z.infer<typeof TimeFormSchema>;
+
 export const CreateEventFormSchema = z.object({
   title: TitleFormSchema.optional(),
   audience: AudienceFormSchema.optional(),
+  time: TimeFormSchema.optional(),
 });
 
 export type CreateEventForm = z.infer<typeof CreateEventFormSchema>;

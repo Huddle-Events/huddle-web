@@ -27,7 +27,7 @@ export const CreateEventFormatSelector = (props: Props) => {
               props.onChange(eventFormat);
             }}
             className={clsx(
-              "text-base font-normal border p-4 first:rounded-l-md last:rounded-r-md cursor-pointer",
+              "text-base font-normal border p-3 first:rounded-l-md last:rounded-r-md cursor-pointer",
               {
                 "bg-black text-white": isSelected,
               },

@@ -20,9 +20,11 @@ import {
 } from "@/models/create-event.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { z } from "zod";
 
 const CreateEventFormAudience = () => {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof AudienceFormSchema>>({
     resolver: zodResolver(AudienceFormSchema),
     defaultValues: {
@@ -37,6 +39,7 @@ const CreateEventFormAudience = () => {
   function onSubmit(values: AudienceForm) {
     console.log({ values });
     setCreateEventParams((params) => ({ ...params, audience: values }));
+    navigate("/create-event/time");
   }
   return (
     <div className={"flex flex-col gap-4"}>
