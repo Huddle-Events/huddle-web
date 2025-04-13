@@ -37,7 +37,6 @@ const CreateEventFormAudience = () => {
 
   const { setCreateEventParams } = useCreateEvent();
   function onSubmit(values: AudienceForm) {
-    console.log({ values });
     setCreateEventParams((params) => ({ ...params, audience: values }));
     navigate("/create-event/time");
   }
