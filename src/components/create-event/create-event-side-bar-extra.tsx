@@ -10,23 +10,23 @@ import {
 const extraSections: { url: string; title: string }[] = [
   {
     title: "Content Body",
-    url: "/content-body",
+    url: "content-body",
   },
   {
     title: "Agenda",
-    url: "/agenda",
+    url: "agenda",
   },
   {
     title: "FAQ",
-    url: "/faq",
+    url: "faq",
   },
   {
     title: "Partners/Sponsors",
-    url: "/partners-sponsors",
+    url: "partners-sponsors",
   },
   {
     title: "Questionnaire",
-    url: "/questionnaire",
+    url: "questionnaire",
   },
 ];
 

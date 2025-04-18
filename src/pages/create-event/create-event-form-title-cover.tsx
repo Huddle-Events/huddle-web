@@ -1,4 +1,3 @@
-import { CreateEventTitle } from "@/components/create-event/create-event-title.tsx";
 import { FileDrop } from "@/components/file-drop.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {
@@ -34,67 +33,59 @@ export const CreateEventFormTitleCover = () => {
     navigate("/create-event/audience");
   }
   return (
-    <div className={"flex flex-col gap-4 pr-3"}>
-      <CreateEventTitle
-        title={"Title & Cover"}
-        description={
-          "Create an attractive title and cover photo for your event to capture the attention of your target audience."
-        }
-      />
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex flex-col gap-6">
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className={"text-xl font-medium font-inter"}>
-                    Create a title for your event
-                  </FormLabel>
-                  <FormControl>
-                    <Input placeholder="Event Title" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="type"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className={"text-xl font-medium font-inter"}>
-                    What type of event is this ?
-                  </FormLabel>
-                  <FormControl>
-                    <Input placeholder="Event Type" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="flex flex-col gap-2">
-              <h2 className={"font-inter text-xl font-medium"}>
-                Upload a cover photo and images
-              </h2>
-              <p className={"font-sf-pro text-base font-normal text-muted"}>
-                Upload images for your listing. You can upload up to 10 images,
-                and select 1 cover image.
-              </p>
-              <FileDrop />
-            </div>
-            <div className="flex justify-between">
-              <Button variant={"ghost"} className={"bg-elevated"}>
-                Back
-              </Button>
-              <Button variant={"defaultDark"} type="submit">
-                Submit
-              </Button>
-            </div>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="flex flex-col gap-6">
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className={"text-xl font-medium font-inter"}>
+                  Create a title for your event
+                </FormLabel>
+                <FormControl>
+                  <Input placeholder="Event Title" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="type"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className={"text-xl font-medium font-inter"}>
+                  What type of event is this ?
+                </FormLabel>
+                <FormControl>
+                  <Input placeholder="Event Type" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="flex flex-col gap-2">
+            <h2 className={"font-inter text-xl font-medium"}>
+              Upload a cover photo and images
+            </h2>
+            <p className={"font-sf-pro text-base font-normal text-muted"}>
+              Upload images for your listing. You can upload up to 10 images,
+              and select 1 cover image.
+            </p>
+            <FileDrop />
           </div>
-        </form>
-      </Form>
-    </div>
+          <div className="flex justify-between">
+            <Button variant={"ghost"} className={"bg-elevated"}>
+              Back
+            </Button>
+            <Button variant={"defaultDark"} type="submit">
+              Submit
+            </Button>
+          </div>
+        </div>
+      </form>
+    </Form>
   );
 };

@@ -41,10 +41,22 @@ export const TimeFormSchema = z.object({
 
 export type TimeForm = z.infer<typeof TimeFormSchema>;
 
+const TicketSchema = z.object({
+  price: z.number(),
+  limit: z.number(),
+  title: z.string().min(3).max(20),
+});
+export const TicketFormSchema = z.object({
+  tickets: z.array(TicketSchema),
+  daysBeforeEvent: z.number(),
+});
+export type TicketForm = z.infer<typeof TicketFormSchema>;
+export type Ticket = z.infer<typeof TicketSchema>;
 export const CreateEventFormSchema = z.object({
   title: TitleFormSchema.optional(),
   audience: AudienceFormSchema.optional(),
   time: TimeFormSchema.optional(),
+  tickets: TicketFormSchema.optional(),
 });
 
 export type CreateEventForm = z.infer<typeof CreateEventFormSchema>;
