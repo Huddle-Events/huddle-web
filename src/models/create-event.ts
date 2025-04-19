@@ -40,15 +40,32 @@ export const TimeFormSchema = z.object({
 });
 
 export type TimeForm = z.infer<typeof TimeFormSchema>;
+export const twoDecimalSchema = z
+  .number()
+  .min(1)
+  .refine(
+    (value) => {
+      const tolerance = 1e-10;
+      const multiplier = 100;
+      const fractionalPart =
+        value * multiplier - Math.trunc(value * multiplier);
+      return Math.abs(fractionalPart) < tolerance;
+      // return Math.abs(fractionalPart) < Number.EPSILON;
+    },
+    {
+      message: "Number must have up to two decimal places",
+    },
+  );
 
 const TicketSchema = z.object({
-  price: z.number(),
+  price: twoDecimalSchema,
   limit: z.number(),
   title: z.string().min(3).max(20),
 });
+
 export const TicketFormSchema = z.object({
-  tickets: z.array(TicketSchema),
-  daysBeforeEvent: z.number(),
+  tickets: z.array(TicketSchema).optional(),
+  daysBeforeEvent: z.number().optional(),
 });
 export type TicketForm = z.infer<typeof TicketFormSchema>;
 export type Ticket = z.infer<typeof TicketSchema>;
@@ -60,3 +77,14 @@ export const CreateEventFormSchema = z.object({
 });
 
 export type CreateEventForm = z.infer<typeof CreateEventFormSchema>;
+
+if (import.meta.vitest) {
+  const { it, expect } = import.meta.vitest;
+  it.each<[number]>([[1], [2], [2.22], [1.22], [1.11]])(
+    "should validate two decimal schema for %f",
+    (value) => {
+      const parse = twoDecimalSchema.safeParse(value);
+      expect(parse.success).toBe(true);
+    },
+  );
+}

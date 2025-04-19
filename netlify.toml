@@ -1,0 +1,7 @@
+[build]
+command = "pnpm test && pnpm build"
+publish = "dist"
+
+[dev]
+  framework = "vite"
+  autoLaunch = true

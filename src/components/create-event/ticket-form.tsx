@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button.tsx";
-import { Separator } from "@/components/ui/separator.tsx";
 import { cn } from "@/lib/utils.ts";
 import { Ticket } from "@/models/create-event.ts";
 import {
@@ -24,7 +23,10 @@ const ButtonIcon = (props: ButtonProps) => {
   return (
     <Button
       variant={"outline"}
-      onClick={props.onClick}
+      onClick={(e) => {
+        e.preventDefault();
+        props.onClick();
+      }}
       className={cn("rounded-full border-border w-5 h-8", props.className)}
     >
       <props.icon
@@ -63,7 +65,9 @@ export const TicketForm = ({ ticket, onChange }: Props) => {
         <div className="flex gap-2 items-center gap-3">
           <ButtonIcon
             icon={Minus}
-            onClick={() => {}}
+            onClick={() => {
+              onChange({ ...ticket, limit: ticket.limit - 1 });
+            }}
             classNameIcon={"text-muted"}
           />
           <span className="font-sf-pro font-semibold text-2xl leading-6">
@@ -72,7 +76,9 @@ export const TicketForm = ({ ticket, onChange }: Props) => {
 
           <ButtonIcon
             icon={Plus}
-            onClick={() => {}}
+            onClick={() => {
+              onChange({ ...ticket, limit: ticket.limit + 1 });
+            }}
             classNameIcon={"text-muted"}
           />
         </div>
