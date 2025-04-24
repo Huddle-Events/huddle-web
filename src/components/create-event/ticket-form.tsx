@@ -17,29 +17,26 @@ interface ButtonProps {
   icon: LucideIcon;
   onClick: () => void;
   className?: string;
-  classNameIcon?: string;
 }
 const ButtonIcon = (props: ButtonProps) => {
   return (
-    <Button
-      variant={"outline"}
-      onClick={(e) => {
-        e.preventDefault();
-        props.onClick();
-      }}
-      className={cn("rounded-full border-border w-5 h-8", props.className)}
-    >
-      <props.icon
-        className={cn("text-white fill-disabled", props.classNameIcon)}
-      />
-    </Button>
+    <props.icon
+      className={cn(
+        "text-white fill-disabled border border-border rounded-full p-1 cursor-pointer",
+        props.className,
+      )}
+      onClick={props.onClick}
+    />
   );
 };
+
 export const TicketForm = ({ ticket, onChange }: Props) => {
   const { title, limit, price } = ticket;
-  const earning = "Free ticket";
+
+  const earning = price === 0 ? 0 : price - (price * 0.05 + 0.3);
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-[238px]">
       <div className="border rounded-t-xl border-border pt-6 px-14 pb-6 flex flex-col gap-2 items-center">
         <TicketIcon className={"text-muted -rotate-[30deg]"} size={30} />
         <div className="flex gap-2.5">
@@ -50,25 +47,25 @@ export const TicketForm = ({ ticket, onChange }: Props) => {
         </div>
         <div className="flex gap-2.5 items-end">
           <span className="font-inter font-semibold text-5xl">${price}</span>
-          <ButtonIcon className="mb-1" icon={Pencil} onClick={() => {}} />
+          <ButtonIcon icon={Pencil} onClick={() => {}} />
         </div>
         <div className={"border border-border rounded-sm px-2 py-1"}>
           <span className="text-xs font-sf-pro font-medium text-muted leading-4">
-            {earning}
+            {earning === 0 ? "Free ticket" : `You earn $${earning.toFixed(2)}`}
           </span>
         </div>
       </div>
-      <div className="border-x border-b rounded-b-xl py-3 items-center flex flex-col leading-6">
+      <div className="border-x border-b rounded-b-xl py-4 items-center flex flex-col leading-6">
         <span className="text-base font-sf-pro font-normal text-muted">
           Limit
         </span>
-        <div className="flex gap-2 items-center gap-3">
+        <div className="flex items-center gap-5">
           <ButtonIcon
             icon={Minus}
             onClick={() => {
               onChange({ ...ticket, limit: ticket.limit - 1 });
             }}
-            classNameIcon={"text-muted"}
+            className={"text-muted"}
           />
           <span className="font-sf-pro font-semibold text-2xl leading-6">
             {limit}
@@ -79,7 +76,7 @@ export const TicketForm = ({ ticket, onChange }: Props) => {
             onClick={() => {
               onChange({ ...ticket, limit: ticket.limit + 1 });
             }}
-            classNameIcon={"text-muted"}
+            className={"text-muted"}
           />
         </div>
       </div>

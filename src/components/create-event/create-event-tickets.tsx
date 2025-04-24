@@ -16,7 +16,6 @@ export const CreateEventTickets = ({ value = [], onChange }: Props) => {
             const listWithoutTicket = value.filter(
               (t) => t.title !== ticket.title,
             );
-            console.log(value, ticket, listWithoutTicket);
             onChange([...listWithoutTicket, ticket]);
           }}
           ticket={ticket}

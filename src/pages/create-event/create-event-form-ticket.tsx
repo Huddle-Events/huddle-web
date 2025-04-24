@@ -11,9 +11,9 @@ export const CreateEventFormTicket = () => {
     defaultValues: {
       tickets: [
         {
-          title: "Free",
+          title: "Standard",
           limit: 50,
-          price: 0,
+          price: 100,
         },
       ],
       daysBeforeEvent: 0,
