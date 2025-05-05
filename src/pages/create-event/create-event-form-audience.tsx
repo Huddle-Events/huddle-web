@@ -24,6 +24,7 @@ import { z } from "zod";
 
 const CreateEventFormAudience = () => {
   const navigate = useNavigate();
+  const { setCreateEventParams, createEventParams } = useCreateEvent();
   const form = useForm<z.infer<typeof AudienceFormSchema>>({
     resolver: zodResolver(AudienceFormSchema),
     defaultValues: {
@@ -31,10 +32,10 @@ const CreateEventFormAudience = () => {
       eventView: "InviteOnly",
       industry: "Administration",
       searchTags: [],
+      ...createEventParams.audience,
     },
   });
 
-  const { setCreateEventParams } = useCreateEvent();
   function onSubmit(values: AudienceForm) {
     setCreateEventParams((params) => ({ ...params, audience: values }));
     navigate("/create-event/time");
@@ -98,7 +99,13 @@ const CreateEventFormAudience = () => {
           <Separator />
 
           <div className="flex justify-between">
-            <Button variant={"ghost"} className={"bg-elevated"}>
+            <Button
+              onClick={() => {
+                navigate(-1);
+              }}
+              variant={"ghost"}
+              className={"bg-elevated"}
+            >
               Back
             </Button>
             <Button variant={"defaultDark"} type="submit">

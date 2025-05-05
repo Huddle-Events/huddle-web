@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -31,6 +32,7 @@ const essentialSections: { url: string; title: string }[] = [
 ];
 
 export const CreateEventSideBarEssential = () => {
+  const navigate = useNavigate();
   return (
     <SidebarGroup>
       <SidebarGroupLabel
@@ -43,15 +45,15 @@ export const CreateEventSideBarEssential = () => {
           {essentialSections.map((level) => {
             return (
               <SidebarMenuItem key={level.title}>
-                <SidebarMenuButton asChild>
-                  <div className={"flex flex-row gap-2"}>
-                    <a
-                      className={"font-sf-pro font-normal text-base"}
-                      href={level.url}
-                    >
-                      {level.title}
-                    </a>
-                  </div>
+                <SidebarMenuButton className={"text-base"} asChild>
+                  <span
+                    onClick={() => {
+                      navigate(`/create-event/${level.url}`);
+                    }}
+                    className={"cursor-pointer font-sf-pro font-normal"}
+                  >
+                    {level.title}
+                  </span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             );

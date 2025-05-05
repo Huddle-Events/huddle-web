@@ -42,7 +42,7 @@ export const TimeFormSchema = z.object({
 export type TimeForm = z.infer<typeof TimeFormSchema>;
 export const twoDecimalSchema = z
   .number()
-  .min(1)
+  .min(3)
   .refine(
     (value) => {
       const tolerance = 1e-10;
@@ -57,15 +57,16 @@ export const twoDecimalSchema = z
     },
   );
 
-const TicketSchema = z.object({
-  price: twoDecimalSchema,
+export const TicketSchema = z.object({
+  price: z.union([twoDecimalSchema, z.number().min(0).max(0)]),
   limit: z.number(),
   title: z.string().min(3).max(20),
+  id: z.string().optional(),
 });
 
 export const TicketFormSchema = z.object({
-  tickets: z.array(TicketSchema).optional(),
-  daysBeforeEvent: z.number().optional(),
+  tickets: z.array(TicketSchema),
+  daysBeforeEvent: z.number().gt(0, { message: "cannot have under 1" }),
 });
 export type TicketForm = z.infer<typeof TicketFormSchema>;
 export type Ticket = z.infer<typeof TicketSchema>;
@@ -87,4 +88,8 @@ if (import.meta.vitest) {
       expect(parse.success).toBe(true);
     },
   );
+  it("should invalidate with negative number", () => {
+    const parse = twoDecimalSchema.safeParse(-100);
+    expect(parse.success).toBe(false);
+  });
 }

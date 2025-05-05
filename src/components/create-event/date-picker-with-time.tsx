@@ -31,9 +31,9 @@ export const DatePickerWithTime = (props: Props) => {
           >
             <CalendarIcon className="h-4 w-4 opacity-50" />
             {props.value ? (
-              format(props.value, "MM/dd/yyyy HH:mm")
+              format(props.value, "dd/MM/yyyy HH:mm")
             ) : (
-              <span>MM/DD/YYYY HH:mm</span>
+              <span>DD/MM/YYYY HH:mm</span>
             )}
           </Button>
         </FormControl>

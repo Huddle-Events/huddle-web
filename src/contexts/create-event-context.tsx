@@ -16,7 +16,6 @@ export const CreateEventProvider = ({ children }: { children: ReactNode }) => {
   const [createEventParams, setCreateEventParams] = useState<CreateEventForm>(
     {} as CreateEventForm,
   );
-
   const [files, setFiles] = useState<File[]>([]);
   return (
     <CreateEventContext.Provider

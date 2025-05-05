@@ -18,7 +18,6 @@ import { Switch } from "@/components/ui/switch.tsx";
 import { useCreateEvent } from "@/contexts/create-event-context.tsx";
 import { TimeForm, TimeFormSchema } from "@/models/create-event.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addDays } from "date-fns";
 import { Link, MapPin } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -26,24 +25,25 @@ import { useNavigate } from "react-router";
 
 export const CreateEventFormTimeLocation = () => {
   const [showEndDate, setShowEndDate] = useState(false);
+
+  const { setCreateEventParams, createEventParams } = useCreateEvent();
   const form = useForm<TimeForm>({
     resolver: zodResolver(TimeFormSchema),
     defaultValues: {
       location: "",
       startDate: new Date(),
-      endDate: addDays(new Date(), 1),
       virtualAttendanceLink: "",
       isRecurring: false,
+      ...createEventParams.time,
     },
   });
   const navigate = useNavigate();
-  const { setCreateEventParams } = useCreateEvent();
 
   function onSubmit(values: TimeForm) {
     setCreateEventParams((params) => {
       return { ...params, time: values };
     });
-    navigate("/create-event/ticket");
+    navigate("/create-event/tickets");
   }
 
   return (
@@ -146,7 +146,13 @@ export const CreateEventFormTimeLocation = () => {
             )}
           />
           <div className="flex justify-between">
-            <Button variant={"ghost"} className={"bg-elevated"}>
+            <Button
+              onClick={() => {
+                navigate(-1);
+              }}
+              variant={"ghost"}
+              className={"bg-elevated"}
+            >
               Back
             </Button>
             <Button variant={"defaultDark"} type="submit">

@@ -17,15 +17,16 @@ import { useNavigate } from "react-router";
 import { z } from "zod";
 
 export const CreateEventFormTitleCover = () => {
+  const { setCreateEventParams, createEventParams } = useCreateEvent();
   const form = useForm<z.infer<typeof TitleFormSchema>>({
     resolver: zodResolver(TitleFormSchema),
     defaultValues: {
       title: "",
       type: "",
+      ...createEventParams.title,
     },
   });
   const navigate = useNavigate();
-  const { setCreateEventParams } = useCreateEvent();
   function onSubmit(values: TitleForm) {
     setCreateEventParams((params) => {
       return { ...params, title: values };
