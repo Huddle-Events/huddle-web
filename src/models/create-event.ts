@@ -70,11 +70,27 @@ export const TicketFormSchema = z.object({
 });
 export type TicketForm = z.infer<typeof TicketFormSchema>;
 export type Ticket = z.infer<typeof TicketSchema>;
+
+export const PeopleSchema = z.object({
+  fullName: z.string().min(3).max(255),
+  position: z.string().min(0),
+  id: z.string().optional(),
+});
+
+export type People = z.infer<typeof PeopleSchema>;
+
+export const PeopleFormSchema = z.object({
+  hosts: z.array(PeopleSchema),
+  guests: z.array(PeopleSchema),
+});
+export type PeopleForm = z.infer<typeof PeopleFormSchema>;
+
 export const CreateEventFormSchema = z.object({
   title: TitleFormSchema.optional(),
   audience: AudienceFormSchema.optional(),
   time: TimeFormSchema.optional(),
   tickets: TicketFormSchema.optional(),
+  peoples: PeopleFormSchema.optional(),
 });
 
 export type CreateEventForm = z.infer<typeof CreateEventFormSchema>;
